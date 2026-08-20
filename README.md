@@ -31,7 +31,7 @@ npm install --global @devcontainers/cli
 Build and start this repository as a Dev Container:
 
 ```sh
-git clone https://github.com/jatcod3r/devcontainer.git
+git clone https://github.com/nboyers/devcontainer.git
 cd devcontainer
 
 devcontainer build --workspace-folder .
@@ -94,7 +94,7 @@ resource "coder_agent" "dev" {
 		sudo apt-get update
 		sudo apt-get install -y git curl nodejs npm
 		rm -rf /home/coder/workspace
-		git clone https://github.com/jatcod3r/devcontainer.git /home/coder/workspace
+		git clone https://github.com/nboyers/devcontainer.git /home/coder/workspace
 
 		sudo npm install --global @devcontainers/cli
 		devcontainer up --workspace-folder /home/coder/workspace
