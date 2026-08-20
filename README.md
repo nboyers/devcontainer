@@ -36,7 +36,6 @@ cd devcontainer
 
 devcontainer build --workspace-folder .
 devcontainer up --workspace-folder .
-devcontainer exec --workspace-folder . bash
 ```
 
 The commands above use [.devcontainer/devcontainer.json](.devcontainer/devcontainer.json),
@@ -49,7 +48,6 @@ devcontainer exec --workspace-folder . sh -lc \
 	'whoami && printf "SOME_ENV_VAR=%s\\n" "$SOME_ENV_VAR" && vim --version | head -n 1'
 devcontainer exec --workspace-folder . sh -lc \
 	'curl --fail http://127.0.0.1:13337/healthz'
-devcontainer down --workspace-folder .
 ```
 
 Run the example Python app inside the container:
@@ -58,8 +56,21 @@ Run the example Python app inside the container:
 devcontainer exec --workspace-folder . python3 example/app.py
 ```
 
+Leave the app command running, then use a second terminal to run:
+
+```sh
+curl http://localhost:8000/
+curl http://localhost:8000/health
+curl http://localhost:8000/config
+```
+
 Open `http://localhost:8000` in a browser. The app also exposes `/health` and `/config`
-to demonstrate a container health check and reading `SOME_ENV_VAR` from Python.
+to demonstrate a container health check and reading `SOME_ENV_VAR` from Python. Stop
+the app with `Ctrl+C`, then remove the container:
+
+```sh
+devcontainer down --workspace-folder .
+```
 
 In VS Code, install the Dev Containers extension, open this repository, and run
 **Dev Containers: Reopen in Container**. In Coder, open the code-server app created by
@@ -85,7 +96,7 @@ resource "coder_agent" "dev" {
 		rm -rf /home/coder/workspace
 		git clone https://github.com/jatcod3r/devcontainer.git /home/coder/workspace
 
-		npm install --global @devcontainers/cli
+		sudo npm install --global @devcontainers/cli
 		devcontainer up --workspace-folder /home/coder/workspace
 	EOT
 }
