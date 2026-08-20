@@ -3,6 +3,8 @@
         "dockerfile": "Dockerfile"
     },
 
+	"remoteUser": "coder",
+
     "remoteEnv": {
         "SOME_ENV_VAR": "A_RANDOM_VALUE"
     },
@@ -15,7 +17,8 @@
         }
     },
 
-    "appPort": ["13337:13337"],
+	"forwardPorts": [8000],
+	"appPort": ["13337:13337"],
 
     "customizations": {
         "vscode": {
